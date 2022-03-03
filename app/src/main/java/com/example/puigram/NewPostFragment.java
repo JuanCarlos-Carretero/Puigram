@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.BuildConfig;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -111,6 +113,10 @@ public class NewPostFragment extends Fragment {
                     public void onSuccess(DocumentReference documentReference) {
                         navController.popBackStack();
                         appViewModel.setMediaSeleccionado( null, null);
+
+                        String chatId = documentReference.getId();
+                        Log.v("CHATS", chatId);
+                        documentReference.update("id", chatId);
                     }
                 });
     }

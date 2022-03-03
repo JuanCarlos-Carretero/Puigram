@@ -5,6 +5,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -78,6 +79,18 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull final Post post) {
+            String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            Glide.with(getContext()).load(post.authorPhotoUrl).circleCrop().into(holder.authorPhotoImageView);
+            holder.authorTextView.setText(post.author);
+            holder.contentTextView.setText(post.content);
+            holder.dateTextView.setText(DateFormat.format("dd/MM/yy HH:mm", new Date(post.date)).toString());
+
+            if (!user.equals(post.uid)){
+                holder.borrar.setVisibility(View.GONE);
+            }else{
+                holder.borrar.setVisibility(View.VISIBLE);
+            }
+
             if (post.authorPhotoUrl != null){
                 Glide.with(getContext()).load(post.authorPhotoUrl).circleCrop().into(holder.authorPhotoImageView);
                 holder.authorTextView.setText(post.author);
@@ -118,10 +131,16 @@ public class HomeFragment extends Fragment {
             } else {
                 holder.mediaImageView.setVisibility(View.GONE);
             }
+            holder.borrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FirebaseFirestore.getInstance().collection("posts").document(post.id).delete();
+                }
+            });
         }
 
         class PostViewHolder extends RecyclerView.ViewHolder {
-            ImageView authorPhotoImageView, likeImageView, mediaImageView;
+            ImageView authorPhotoImageView, likeImageView, mediaImageView, borrar;
             TextView authorTextView, contentTextView, numLikesTextView, dateTextView;
 
             PostViewHolder(@NonNull View itemView) {
@@ -133,6 +152,7 @@ public class HomeFragment extends Fragment {
                 contentTextView = itemView.findViewById(R.id.contentTextView);
                 numLikesTextView = itemView.findViewById(R.id.numLikesTextView);
                 dateTextView = itemView.findViewById(R.id.dateTextView);
+                borrar = itemView.findViewById(R.id.buttonBorrar);
             }
         }
     }

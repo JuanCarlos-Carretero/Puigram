@@ -143,6 +143,7 @@ public class SignInFragment extends Fragment {
                         .build());
         activityResultLauncher.launch(googleSignInClient.getSignInIntent());
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         if(acct == null) return;
         signInProgressBar.setVisibility(View.VISIBLE);

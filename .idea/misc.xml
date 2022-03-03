@@ -19,6 +19,9 @@
         <entry key="..\:/Users/Juan Carlos/AndroidStudioProjects/Puigram/app/src/main/res/layout/viewholder_post.xml" value="0.25" />
         <entry key="..\:/Users/Juan Carlos/AndroidStudioProjects/Puigram/app/src/main/res/menu/activity_main_drawer.xml" value="0.25" />
         <entry key="..\:/Users/Juan Carlos/AndroidStudioProjects/Puigram/app/src/main/res/menu/main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.35885416666666664" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.35885416666666664" />
+        <entry key="app/src/main/res/layout/viewholder_post.xml" value="0.35885416666666664" />
       </map>
     </option>
   </component>

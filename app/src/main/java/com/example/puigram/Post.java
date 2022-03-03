@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Post {
+    public String id;
     public String uid;
     public String author;
     public String authorPhotoUrl;
